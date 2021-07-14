@@ -1,6 +1,6 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow, autoUpdater, dialog} = require('electron')
-require('update-electron-app')()  // 更新应用程序
+// require('update-electron-app')()  // 更新应用程序
 const path = require('path')
 
 function createWindow () {
@@ -48,34 +48,34 @@ app.on('window-all-closed', function () {
 // 根据electron-is-dev检查当前环境
 // 构建更新服务器的url并且通知 autoUpdater
 
-// const server = 'https://your-damandmenturl.com'
-// const url = `${server}/update/${process.platform}/${app.getVersion()}`
-//
-// autoUpdater.setFeedURL({ url })
-//
-// // 检查更新
-// setInterval(() => {
-//   autoUpdater.checkForUpdates()
-// }, 60000)
-// // 自动更新
-// autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
-//   const dialogOpts = {
-//     type: 'info',
-//     buttons: ['Restart', 'Later'],
-//     title: 'Application Update',
-//     message: process.platform === 'win32' ? releaseNotes : releaseName,
-//     detail: 'A new version has been downloaded. Restart the application to apply the updates.'
-//   }
-//
-//   dialog.showMessageBox(dialogOpts).then((returnValue) => {
-//     if (returnValue.response === 0) autoUpdater.quitAndInstall()
-//   })
-// })
-//
-// autoUpdater.on('error', message => {
-//   console.error('There was a problem updating the application')
-//   console.error(message)
-// })
+const server = 'https://electron-quick-start.vercel.app/'
+const url = `${server}/update/${process.platform}/${app.getVersion()}`
+
+autoUpdater.setFeedURL({ url })
+
+// 检查更新
+setInterval(() => {
+  autoUpdater.checkForUpdates()
+}, 60000)
+// 自动更新
+autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+  const dialogOpts = {
+    type: 'info',
+    buttons: ['Restart', 'Later'],
+    title: 'Application Update',
+    message: process.platform === 'win32' ? releaseNotes : releaseName,
+    detail: 'A new version has been downloaded. Restart the application to apply the updates.'
+  }
+
+  dialog.showMessageBox(dialogOpts).then((returnValue) => {
+    if (returnValue.response === 0) autoUpdater.quitAndInstall()
+  })
+})
+
+autoUpdater.on('error', message => {
+  console.error('There was a problem updating the application')
+  console.error(message)
+})
 
 
 
