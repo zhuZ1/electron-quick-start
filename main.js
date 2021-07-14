@@ -34,9 +34,14 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
 
+  // 检查更新
   setInterval(() => {
     autoUpdater.checkForUpdates()
   }, 60000)
+
+  app.on('checking-for-update', () => {
+    console.log('开始检查更新了')
+  })
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -59,7 +64,7 @@ const url = `${server}/update/${process.platform}/${app.getVersion()}`
 
 autoUpdater.setFeedURL({ url })
 
-// 检查更新
+
 
 // 自动更新
 autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
