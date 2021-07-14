@@ -33,16 +33,18 @@ app.whenReady().then(() => {
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
+})
 
-  // 检查更新
+// 检查更新
+app.on('ready', function () {
   setInterval(() => {
     autoUpdater.checkForUpdates()
   }, 60000)
-
-  app.on('checking-for-update', () => {
-    console.log('开始检查更新了')
-  })
 })
+
+app.on('checking-for-update', () => {
+  console.log('开始检查更新了')
+}) 
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
