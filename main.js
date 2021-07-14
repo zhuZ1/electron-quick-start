@@ -16,6 +16,8 @@ function createWindow () {
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
 
+  mainWindow.webContents.openDevTools({mode:'right'})
+
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }
@@ -48,7 +50,7 @@ app.on('window-all-closed', function () {
 // 根据electron-is-dev检查当前环境
 // 构建更新服务器的url并且通知 autoUpdater
 
-const server = 'https://electron-quick-start.vercel.app/'
+const server = 'https://electron-quick-start.vercel.app'
 const url = `${server}/update/${process.platform}/${app.getVersion()}`
 
 autoUpdater.setFeedURL({ url })
