@@ -33,6 +33,10 @@ app.whenReady().then(() => {
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
+
+  setInterval(() => {
+    autoUpdater.checkForUpdates()
+  }, 60000)
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -56,9 +60,7 @@ const url = `${server}/update/${process.platform}/${app.getVersion()}`
 autoUpdater.setFeedURL({ url })
 
 // 检查更新
-setInterval(() => {
-  autoUpdater.checkForUpdates()
-}, 60000)
+
 // 自动更新
 autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
   const dialogOpts = {
